@@ -1,0 +1,71 @@
+---
+# Undeploy AirTrail and Postgres from GKE
+
+# Delete Postgres resources first (database)
+- name: Undeploy the Postgres Service
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/postgres-service.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+- name: Undeploy the Postgres Deployment
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/postgres-deployment.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+# Delete AirTrail resources (application)
+- name: Undeploy the AirTrail HPA
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/airtrail-hpa.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+- name: Undeploy the AirTrail Service
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/airtrail-service.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+- name: Undeploy the AirTrail Deployment
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/airtrail-deployment.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+# Delete ConfigMaps and Secrets
+- name: Undeploy the AirTrail ConfigMap
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/airtrail-configmap.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+- name: Undeploy the AirTrail Secret
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/airtrail-secret.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+- name: Undeploy the Postgres Secret
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/postgres-secret.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+
+# Delete PVC last (only when delete_data is true)
+- name: Undeploy the Postgres Persistent Volume Claim
+  kubernetes.core.k8s:
+    state: absent
+    definition: "{{ lookup('template', 'templates/postgres-pvc-claim.yml') }}"
+    wait: yes
+    wait_timeout: "{{ wait_timeout }}"
+  when: delete_data | default(false) | bool
+  tags: ['pvc']

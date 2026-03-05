@@ -1,0 +1,7 @@
+---
+- name: Deploy AirTrail application on Kubernetes
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - airtrail_deploy
