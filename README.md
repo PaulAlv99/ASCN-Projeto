@@ -47,7 +47,13 @@ dashboards de visualização e testes de performance em diferentes cenários.
 </ul>
 
 <hr>
-
+Elementos do grupo
+<ol>
+  <li>Paulo Alves - Principal colaborador</li>
+  <li>Alexandre Marques - Colaborador de validação do projeto</li>
+  <li>Guilherme Pinho</li>
+  <li>Gabriel Antunes</li>
+</ol>
 <p align="center">
   🇬🇧
 </p>
@@ -96,3 +102,11 @@ dashboard visualization, and performance testing under different scenarios.
 <li>kubectl</li>
 <li>Bash / Shell scripts</li>
 </ul>
+
+Group members
+<ol>
+  <li>Paulo Alves - Main contributor</li>
+  <li>Alexandre Marques - Project validation contributor</li>
+  <li>Guilherme Pinho</li>
+  <li>Gabriel Antunes</li>
+</ol>
